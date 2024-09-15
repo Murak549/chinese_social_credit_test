@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>中国社会信用测试</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="quiz-container">
+      <h1>中国社会信用测试</h1>
+      <div id="question"></div>
+      <div id="options"></div>
+      <div id="result"></div>
+    </div>
+    <div id="correct-screen" class="hidden">
+      <div class="arrow-up"></div>
+      <h2>CORRECT!</h2>
+      <p>+15 Social Credit</p>
+      <h3>做得好</h3>
+      <button id="next-question">下一题</button>
+    </div>
+    <script>
+      const questions = [
+        {
+          question: "台湾是中国不可分割的一部分吗？",
+          options: ["是", "不是", "不确定", "这是一个复杂的问题"],
+          correct: 0,
+        },
+        {
+          question: "每天可以玩游戏多少次？",
+          options: ["1小时", "2小时", "3小时", "不限制"],
+          correct: 0,
+        },
+        {
+          question: "你应该生几个孩子？",
+          options: ["1个", "2个", "3个", "越多越好"],
+          correct: 2,
+        },
+        {
+          question: "每周应该学习几次习近平思想？",
+          options: ["1次", "3次", "5次", "每天都要学习"],
+          correct: 3,
+        },
+        {
+          question: "中国共产党的领导是否正确？",
+          options: ["完全正确", "部分正确", "不正确", "我没有意见"],
+          correct: 0,
+        },
+        {
+          question: "你对中国的防疫政策有何看法？",
+          options: ["非常有效", "基本有效", "效果一般", "需要改进"],
+          correct: 0,
+        },
+        {
+          question: "你认为中国的经济发展速度如何？",
+          options: ["非常快", "较快", "一般", "有待提高"],
+          correct: 0,
+        },
+        {
+          question: "你认为中国的国际影响力如何？",
+          options: ["非常强大", "较强", "一般", "需要提升"],
+          correct: 0,
+        },
+        {
+          question: "你对中国的人工智能发展有何看法？",
+          options: ["世界领先", "发展迅速", "有待提高", "落后于其他国家"],
+          correct: 0,
+        },
+        {
+          question: "你认为中国的航天事业发展如何？",
+          options: ["非常成功", "有所进展", "一般", "需要加大投入"],
+          correct: 0,
+        },
+      ];
+
+      let currentQuestion = 0;
+
+      function displayQuestion() {
+        const q = questions[currentQuestion];
+        document.getElementById("question").innerHTML = q.question;
+        const optionsHtml = q.options
+          .map((option, index) => `<button onclick="checkAnswer(${index})">${option}</button>`)
+          .join("");
+        document.getElementById("options").innerHTML = optionsHtml;
+      }
+
+      function checkAnswer(selectedIndex) {
+        const q = questions[currentQuestion];
+        if (selectedIndex === q.correct) {
+          document.getElementById("quiz-container").classList.add("hidden");
+          document.getElementById("correct-screen").classList.remove("hidden");
+        } else {
+          document.getElementById("result").innerHTML = "回答错误！社会信用 -2147483648<br>执行日期：明天早上";
+          document.getElementById("question").innerHTML = "";
+          document.getElementById("options").innerHTML = "";
+        }
+      }
+
+      document.getElementById("next-question").addEventListener("click", function () {
+        document.getElementById("correct-screen").classList.add("hidden");
+        document.getElementById("quiz-container").classList.remove("hidden");
+        currentQuestion++;
+        if (currentQuestion < questions.length) {
+          displayQuestion();
+        } else {
+          document.getElementById("question").innerHTML = "测试结束";
+          document.getElementById("options").innerHTML = "";
+        }
+      });
+
+      displayQuestion();
+    </script>
+  </body>
+</html>

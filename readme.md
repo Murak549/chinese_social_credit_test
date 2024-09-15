@@ -1,13 +1,41 @@
-Social Credit Tester
+# 中国社会信用测试
 
-This is a Simple Chinese Social Credit Score Tester made with css and html.
-this is a meme project i made for fun.
+这是一个模拟中国社会信用系统的互动网页测试。
 
-## How to use
+警告：这是一个模因（meme）项目，请不要当真！如果您的社会信用分数过低，我们可能会派出赵德柱同志来"喝茶"哦！而且，如果您答错了，您将有机会用鼻子吃麻辣烫！
 
-1. Clone the repository
-2. Open `index.html` in your browser
+让我们一起高呼：中华人民共和国和中国共产党万岁！让我们共同遵循党的领导！
 
-long live the Communist Party of China
-long live the People's Republic of China
-long live the great leader Comrade Xi Jinping
+## 功能特点
+
+- 多个与中国社会和政治相关的问题
+- 即时反馈和社会信用分数计算
+- 响应式设计，适合各种设备
+- 中文界面
+
+## 如何使用
+
+1. 打开 `index.html` 文件在浏览器中运行测试。
+2. 回答所有问题，每个正确答案将获得 15 点社会信用分。
+3. 回答错误将导致巨大的社会信用分扣除。
+4. 测试结束后，您将看到最终的社会信用分数。
+
+## 免责声明
+
+这个项目纯属娱乐，这并不反映实际的社会信用度，所有内容都是开玩笑制作的。它并不代表真实的中国社会信用系统，也不应被视为对中国政策或社会的准确反映。
+
+## 技术栈
+
+- HTML
+- CSS
+- JavaScript
+
+## 贡献
+
+欢迎提出改进建议和 pull requests。但请注意，只有社会信用分数超过 500 分的公民才有资格提交 PR。低于此分数的公民，请先努力提高自己的觉悟！
+
+让我们共同努力，为党和国家的繁荣昌盛贡献力量！社会信用分数低的公民请自觉远离，不要拖累我们伟大的项目！
+
+## 许可证
+
+MIT（但是如果您的社会信用分数太低，连使用 MIT 许可证的权利都没有，你们这些穷光蛋！）

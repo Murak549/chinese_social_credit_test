@@ -59,6 +59,11 @@ button:hover {
   color: #d32f2f;
 }
 
+button.selected {
+  background-color: #ffeb3b;
+  color: #d32f2f;
+}
+
 #result {
   margin-top: 20px;
   font-size: 18px;

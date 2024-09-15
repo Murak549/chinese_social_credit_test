@@ -61,19 +61,39 @@
 
       let currentQuestion = 0;
       let socialCredit = 0;
+      let selectedOption = -1;
 
       function displayQuestion() {
         const q = questions[currentQuestion];
         document.getElementById("question").innerHTML = q.question;
         const optionsHtml = q.options
-          .map((option, index) => `<button onclick="checkAnswer(${index})">${option}</button>`)
+          .map((option, index) => `<button id="option-${index}" onclick="selectOption(${index})">${option}</button>`)
           .join("");
         document.getElementById("options").innerHTML = optionsHtml;
+        selectedOption = -1;
       }
 
-      function checkAnswer(selectedIndex) {
+      function selectOption(index) {
+        selectedOption = index;
+        updateSelectedOption();
+      }
+
+      function updateSelectedOption() {
+        const buttons = document.querySelectorAll("#options button");
+        buttons.forEach((button, index) => {
+          if (index === selectedOption) {
+            button.classList.add("selected");
+            button.focus();
+          } else {
+            button.classList.remove("selected");
+          }
+        });
+      }
+
+      function checkAnswer() {
+        if (selectedOption === -1) return;
         const q = questions[currentQuestion];
-        if (selectedIndex === q.correct) {
+        if (selectedOption === q.correct) {
           document.getElementById("quiz-container").classList.add("hidden");
           document.getElementById("correct-screen").classList.remove("hidden");
           socialCredit += 25;
@@ -85,23 +105,53 @@
         }
       }
 
-      document.getElementById("next-question").addEventListener("click", function () {
+      document.getElementById("next-question").addEventListener("click", nextQuestion);
+
+      function nextQuestion() {
         document.getElementById("correct-screen").classList.add("hidden");
         document.getElementById("quiz-container").classList.remove("hidden");
         currentQuestion++;
         if (currentQuestion < questions.length) {
           displayQuestion();
         } else {
-          document.getElementById("question").innerHTML = "测试结束。<br>你的社会信用分数：" + socialCredit;
-          document.getElementById("options").innerHTML = "";
-          document.getElementById("result").innerHTML = "";
-          if (socialCredit > 100) {
-            document.getElementById("result").innerHTML +=
-              "<h2 style='font-size: 24px; color: #ffeb3b;'>做得好！你是优秀的公民！</h2>";
-          } else {
-            document.getElementById("result").innerHTML +=
-              "<h2 style='font-size: 24px; color: #ffeb3b;'>需要改进！努力提高你的社会信用分数！</h2>";
+          endQuiz();
+        }
+      }
+
+      function endQuiz() {
+        document.getElementById("question").innerHTML = `测试结束。<br>你的社会信用分数：${socialCredit}`;
+        document.getElementById("options").innerHTML = "";
+        document.getElementById("result").innerHTML =
+          socialCredit > 100 ? "<h2>做得好！你是优秀的公民！</h2>" : "<h2>需要改进！努力提高你的社会信用分数！</h2>";
+      }
+
+      document.addEventListener("keydown", function (event) {
+        if (document.getElementById("quiz-container").classList.contains("hidden")) {
+          if (event.key === "Enter") {
+            nextQuestion();
           }
+          return;
+        }
+
+        switch (event.key) {
+          case "ArrowUp":
+          case "ArrowLeft":
+            event.preventDefault();
+            selectedOption =
+              (selectedOption - 1 + questions[currentQuestion].options.length) %
+              questions[currentQuestion].options.length;
+            updateSelectedOption();
+            break;
+          case "ArrowDown":
+          case "ArrowRight":
+            event.preventDefault();
+            selectedOption = (selectedOption + 1) % questions[currentQuestion].options.length;
+            updateSelectedOption();
+            break;
+          case "Enter":
+            event.preventDefault();
+            checkAnswer();
+            break;
         }
       });
 

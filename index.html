@@ -16,7 +16,7 @@
     <div id="correct-screen" class="hidden">
       <div class="arrow-up"></div>
       <h2>CORRECT!</h2>
-      <p>+15 Social Credit</p>
+      <p>+25 Social Credit</p>
       <h3>做得好</h3>
       <button id="next-question">下一题</button>
     </div>
@@ -76,7 +76,7 @@
         if (selectedIndex === q.correct) {
           document.getElementById("quiz-container").classList.add("hidden");
           document.getElementById("correct-screen").classList.remove("hidden");
-          socialCredit += 15;
+          socialCredit += 25;
         } else {
           document.getElementById("result").innerHTML = "回答错误！社会信用 -2147483648<br>执行日期：明天早上";
           document.getElementById("question").innerHTML = "";
